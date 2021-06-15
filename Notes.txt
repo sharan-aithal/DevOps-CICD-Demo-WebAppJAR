@@ -1,0 +1,10 @@
+
+
+	
+	unzip
+	go inside demo folder
+	run "mvn clean install"
+	go to target folder
+	get the jar and run
+	check in localhost:8083
+	the default app port is 8083.
