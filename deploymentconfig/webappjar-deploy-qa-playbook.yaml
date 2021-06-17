@@ -2,28 +2,28 @@
 - hosts: all
   tasks:
     - name: create deployment folders
-      command: mkdir -p /home/ubuntu/deploy/deploymentconfig
+      command: mkdir -p /home/ubuntu/deploy-webjar/deploymentconfig
       ignore_errors: True
 
     - name: copy webappjar
       copy:
-        src: /home/ubuntu/deploy/deploymentconfig/target
-        dest: /home/ubuntu/deploy/deploymentconfig/
+        src: /home/ubuntu/deploy-webjar/deploymentconfig/target
+        dest: /home/ubuntu/deploy-webjar/deploymentconfig/
 
     - name: copy webappjar Dockerfile
       copy:
-        src: /home/ubuntu/deploy/deploymentconfig/Dockerfile
-        dest: /home/ubuntu/deploy/deploymentconfig/
+        src: /home/ubuntu/deploy-webjar/deploymentconfig/Dockerfile
+        dest: /home/ubuntu/deploy-webjar/deploymentconfig/
     
     - name: copy webappjar docker-compose yml
       copy:
-        src: /home/ubuntu/deploy/deploymentconfig/webappjar-docker-compose.yml
-        dest: /home/ubuntu/deploy/deploymentconfig/
+        src: /home/ubuntu/deploy-webjar/deploymentconfig/webappjar-docker-compose.yml
+        dest: /home/ubuntu/deploy-webjar/deploymentconfig/
     
     - name: copy webappjar settings .env file
       copy:
-        src: /home/ubuntu/deploy/deploymentconfig/webappjar.settings.qa.env
-        dest: /home/ubuntu/deploy/deploymentconfig/
+        src: /home/ubuntu/deploy-webjar/deploymentconfig/webappjar.settings.qa.env
+        dest: /home/ubuntu/deploy-webjar/deploymentconfig/
     
     - name: stop running webappjar container
       command: sudo docker container stop webappjar
@@ -45,7 +45,7 @@
       command: sudo docker network create webnet
 
     - name: build image of webappjar using the dockerfile in this path
-      command: sudo docker image build -t webappjar /home/ubuntu/deploy/deploymentconfig
+      command: sudo docker image build -t webappjar /home/ubuntu/deploy-webjar/deploymentconfig
 
     - name: docker-compose-up webappjar
-      command: sudo docker-compose --env-file /home/ubuntu/deploy/deploymentconfig/webappjar.settings.qa.env -f /home/ubuntu/deploy/deploymentconfig/webappjar-docker-compose.yml up -d
+      command: sudo docker-compose --env-file /home/ubuntu/deploy-webjar/deploymentconfig/webappjar.settings.qa.env -f /home/ubuntu/deploy-webjar/deploymentconfig/webappjar-docker-compose.yml up -d
