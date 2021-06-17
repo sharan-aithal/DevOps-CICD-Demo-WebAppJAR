@@ -37,13 +37,6 @@
       command: sudo docker rmi webappjar --force
       ignore_errors: True
 
-    - name: remove existing webnet network
-      command: sudo docker network rm webnet
-      ignore_errors: True
-
-    - name: create network webnet
-      command: sudo docker network create webnet
-
     - name: build image of webappjar using the dockerfile in this path
       command: sudo docker image build -t webappjar /home/ubuntu/deploy-webjar/deploymentconfig
 
